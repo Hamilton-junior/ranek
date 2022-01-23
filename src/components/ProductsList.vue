@@ -1,32 +1,40 @@
 <template>
   <section class="products-container">
-    <div v-if="products && products.length" class="products">
-      <div class="product" v-for="(product, index) in products" :key="index">
-        <router-link to="/">
-          <img
-            v-if="product.fotos"
-            :src="product.fotos[0].src"
-            :alt="product.fotos[0].titulo"
-          />
-          <p class="price">{{ product.preco }}</p>
-          <h2 class="title">{{ product.nome }}</h2>
-          <p>{{ product.descricao }}</p>
-        </router-link>
+    <transition mode="out-in">
+      <div v-if="products && products.length" class="products" key="products">
+        <div class="product" v-for="(product, index) in products" :key="index">
+          <router-link to="/">
+            <img
+              v-if="product.fotos"
+              :src="product.fotos[0].src"
+              :alt="product.fotos[0].titulo"
+            />
+            <p class="price">{{ product.preco }}</p>
+            <h2 class="title">{{ product.nome }}</h2>
+            <p>{{ product.descricao }}</p>
+          </router-link>
+        </div>
+        <ProductsPaginate
+          :productsTotal="productsTotal"
+          :productsPerPage="productsPerPage"
+        />
       </div>
-      <ProductsPaginate :productsTotal="productsTotal" :productsPerPage="productsPerPage" />
-    </div>
-    <div v-else-if="products && products.length === 0">
-      <p class="no-results">Busca sem resultados. Tente buscar outro termo.</p>
-    </div>
+      <div v-else-if="products && products.length === 0" key="noResults">
+        <p class="no-results">
+          Busca sem resultados. Tente buscar outro termo.
+        </p>
+      </div>
+      <PageLoading v-else key="loading"/>
+    </transition>
   </section>
 </template>
 
 <script>
-import { api } from '@/services.js';
-import { serialize } from '@/helpers.js';
-import ProductsPaginate from './ProductsPaginate.vue';
+import { api } from "@/services.js";
+import { serialize } from "@/helpers.js";
+import ProductsPaginate from "./ProductsPaginate.vue";
 export default {
-  name: 'ProductsList',
+  name: "ProductsList",
   data() {
     return {
       products: null,
@@ -35,7 +43,7 @@ export default {
     };
   },
   components: {
-    ProductsPaginate
+    ProductsPaginate,
   },
   computed: {
     url() {
@@ -45,8 +53,9 @@ export default {
   },
   methods: {
     getProducts() {
+      this.products = null;
       api.get(this.url).then((response) => {
-        this.productsTotal = Number(response.headers['x-total-count']);
+        this.productsTotal = Number(response.headers["x-total-count"]);
         console.log(response);
         this.products = response.data;
       });
