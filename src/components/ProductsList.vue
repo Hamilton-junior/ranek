@@ -3,13 +3,13 @@
     <transition mode="out-in">
       <div v-if="products && products.length" class="products" key="products">
         <div class="product" v-for="(product, index) in products" :key="index">
-          <router-link to="/">
+          <router-link :to="{ name: 'product', params: { id: product.id} }">
             <img
               v-if="product.fotos"
               :src="product.fotos[0].src"
               :alt="product.fotos[0].titulo"
             />
-            <p class="price">{{ product.preco }}</p>
+            <p class="price">{{ product.preco | numberPrice}}</p>
             <h2 class="title">{{ product.nome }}</h2>
             <p>{{ product.descricao }}</p>
           </router-link>
@@ -24,17 +24,17 @@
           Busca sem resultados. Tente buscar outro termo.
         </p>
       </div>
-      <PageLoading v-else key="loading"/>
+      <PageLoading v-else key="loading" />
     </transition>
   </section>
 </template>
 
 <script>
-import { api } from "@/services.js";
-import { serialize } from "@/helpers.js";
-import ProductsPaginate from "./ProductsPaginate.vue";
+import { api } from '@/services.js';
+import { serialize } from '@/helpers.js';
+import ProductsPaginate from './ProductsPaginate.vue';
 export default {
-  name: "ProductsList",
+  name: 'ProductsList',
   data() {
     return {
       products: null,
@@ -55,7 +55,7 @@ export default {
     getProducts() {
       this.products = null;
       api.get(this.url).then((response) => {
-        this.productsTotal = Number(response.headers["x-total-count"]);
+        this.productsTotal = Number(response.headers['x-total-count']);
         console.log(response);
         this.products = response.data;
       });
