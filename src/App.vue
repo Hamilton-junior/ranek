@@ -2,28 +2,35 @@
   <div id="app">
     <TheHeader />
     <main class="main">
-      <router-view/>
+      <transition mode="out-in">
+        <router-view />
+      </transition>
     </main>
     <TheFooter />
   </div>
 </template>
 
 <script>
-import TheHeader from '@/components/TheHeader.vue';
-import TheFooter from '@/components/TheFooter.vue';
+import TheHeader from "@/components/TheHeader.vue";
+import TheFooter from "@/components/TheFooter.vue";
 export default {
   name: "app",
   components: {
     TheHeader,
-    TheFooter
-  }
-}
+    TheFooter,
+  },
+};
 </script>
 <style>
 * {
   box-sizing: border-box;
 }
-body, ul, li, h1, h2, p {
+body,
+ul,
+li,
+h1,
+h2,
+p {
   margin: 0px;
   padding: 0px;
 }
@@ -33,7 +40,7 @@ ul {
 body {
   font-family: Avenir, Arial, Helvetica, sans-serif;
   color: #345;
-  background: url('./assets/pattern.svg') repeat top;
+  background: url("./assets/pattern.svg") repeat top;
 }
 a {
   color: #345;
@@ -51,7 +58,7 @@ img {
   color: #fff;
   text-align: center;
   font-size: 1rem;
-  box-shadow: 0 4px 8px rgba(30,60,90,0.2);
+  box-shadow: 0 4px 8px rgba(30, 60, 90, 0.2);
   transition: all 0.3s;
   border: none;
   font-family: Avenir, Arial, Helvetica, sans-serif;
@@ -69,7 +76,11 @@ img {
 .main {
   flex: 1;
 }
-input, textarea {
+label {
+  margin-bottom: 5px;
+}
+input,
+textarea {
   border: 1px solid #fff;
   border-radius: 4px;
   padding: 15px;
