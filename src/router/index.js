@@ -1,42 +1,67 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
-import Product from '../views/Product.vue';
-import Login from '../views/Login.vue';
-import User from '../views/user/User.vue';
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "../views/Home.vue";
+import Product from "../views/Product.vue";
+import Login from "../views/Login.vue";
+import User from "../views/user/User.vue";
+import UserProducts from "../views/user/UserProducts.vue";
+import UserEdit from "../views/user/UserEdit.vue";
+import UserPurchases from "../views/user/UserPurchases.vue";
+import UserSales from "../views/user/UserSales.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
+    path: "/",
+    name: "Home",
     component: Home,
   },
   {
-    path: '/produto/:id',
-    name: 'product',
+    path: "/produto/:id",
+    name: "product",
     component: Product,
-    props: true,
+    props: true
   },
   {
-    path: '/login',
-    name: 'login',
+    path: "/login",
+    name: "login",
     component: Login,
   },
   {
-    path: '/usuario',
-    name: 'user',
+    path: "/usuario",
     component: User,
+    children: [
+      {
+        path: "",
+        name: "user",
+        component: UserProducts,
+      },
+      {
+        path: "editar",
+        name: "user-edit",
+        component: UserEdit,
+      },
+      {
+        path: "compras",
+        name: "purchases",
+        component: UserPurchases,
+      },
+      {
+        path: "vendas",
+        name: "sales",
+        component: UserSales,
+      },
+    ],
   },
 ];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes,
   scrollBehavior() {
-    return window.scrollTo({ top: 0, behavior: 'smooth' });
+    return window.scrollTo({ top: 0, behavior: "smooth" });
   },
 });
 
