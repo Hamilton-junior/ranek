@@ -6,7 +6,7 @@
         <li><router-link :to="{ name: 'purchases'}">Compras</router-link></li>
         <li><router-link :to="{ name: 'sales'}">Vendas</router-link></li>
         <li><router-link :to="{ name: 'user-edit'}">Editar Usuário</router-link></li>
-        <li><button @click.prevent="logOut">Deslogar</button></li>
+        <li><button @click="logOut">Deslogar</button></li>
       </ul>
     </nav>
     <transition mode="out-in">
@@ -27,6 +27,42 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.user {
+  display: grid;
+  grid-template-columns: minmax(140px, 200px) 1fr;
+  max-width: 900px;
+  margin: 40px auto;
+  gap: 30px;
+  padding: 20px;
+}
+.sidenav a,
+.sidenav button {
+  padding: 10px;
+  display: block;
+  background: #faf7fc;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+.sidenav a.router-link-exact-active,
+.sidenav a:hover,
+.sidenav button:hover {
+  background: #87f;
+  color: #fff;
+}
+.sidenav button {
+  border: none;
+  width: 100%;
+  font-size: 1rem;
+  text-align: left;
+  font-family: Avenir, Arial, Helvetica, sans-serif;
+  cursor: pointer;
+}
 
+@media (max-width: 500px) {
+  .user {
+    grid-template-columns: 1fr;
+    margin: 0px auto;
+  }
+}
 </style>
