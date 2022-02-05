@@ -24,7 +24,8 @@ export default {
         nome: "",
         preço: "",
         descricao: "",
-        fotos: null, 
+        fotos: null,
+        vendido: "false", 
       }
     }
   },
