@@ -16,7 +16,7 @@
           </button>
           <FinalizePurchase v-else :product="product" />
         </transition>
-        <button class="btn" v-else disabled>Produto Vendido</button>
+        <button class="btn btn-disabled" v-else disabled>Produto Vendido</button>
       </div>
     </div>
     <PageLoading v-else />
@@ -60,6 +60,13 @@ export default {
   padding: 60px 20px;
   margin: 0 auto;
 }
+.images {
+  grid-row: 1 / 3;
+}
+.info {
+  position: sticky;
+  top: 20px;
+}
 .price {
   color: #e80;
   font-weight: bold;
@@ -68,6 +75,12 @@ export default {
 }
 .description {
   font-size: 1.2rem;
+}
+
+img {
+  margin-bottom: 30px;
+  box-shadow: 0 4px 8px rgba(30, 60, 90, .2);
+  border-radius: 4px;
 }
 .btn {
   margin-top: 60px;

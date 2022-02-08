@@ -80,6 +80,11 @@ img {
   background: #65d;
   transform: scale(1.1);
 }
+.btn-disabled,
+.btn-disabled:hover {
+  background: #bbc;
+  transform: scale(1);
+}
 #app {
   display: flex;
   flex-direction: column;
