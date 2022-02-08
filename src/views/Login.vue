@@ -32,8 +32,7 @@ export default {
   },
   methods: {
     logar() {
-      this.$store.dispatch('loginUser', this.login).then(response => {
-        console.log(response);
+      this.$store.dispatch('loginUser', this.login).then(() => {
       this.$store.dispatch("getUser");
       this.$router.push({name: 'user'})
       })
