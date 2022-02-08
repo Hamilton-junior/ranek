@@ -6,7 +6,7 @@
     <transition-group v-if="user_products" name="list" tag="ul">
       <li v-for="(product, index) in user_products" :key="index">
         <ProductItem :product="product">
-          <p>{{product.descricao}}</p>
+          <p class="description">{{product.descricao}}</p>
           <button class="delete" @click="deleteProduct(product.id)">Deletar</button>
         </ProductItem>
       </li>

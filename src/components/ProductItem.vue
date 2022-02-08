@@ -32,7 +32,15 @@ position: relative;
     gap: 10px;
   }
 }
-
+.title {
+  color: #345;
+  margin: 10px 0;
+  font-weight: bold;
+}
+.price {
+  color: #e80;
+  font-weight: bold;
+}
 .info {
   align-self: end;
 }
