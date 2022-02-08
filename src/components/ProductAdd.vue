@@ -22,7 +22,7 @@ export default {
     return {
       product: {
         nome: "",
-        preço: "",
+        preco: "",
         descricao: "",
         fotos: null,
         vendido: "false", 

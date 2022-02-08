@@ -1,8 +1,23 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'http://localhost/ranek/wp-json/api',
 });
+
+axiosInstance.interceptors.request.use(
+  function(config) {
+    const token = window.localStorage.token;
+    if(token) {
+      config.headers.Authorization = token
+    }
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+
+)
+
 export const api = {
   get(endpoint) {
     return axiosInstance.get(endpoint);
@@ -15,6 +30,12 @@ export const api = {
   },
   put(endpoint, body) {
     return axiosInstance.put(endpoint, body)
+  },
+  login(body) {
+    return axios.post('http://localhost/ranek/wp-json/jwt-auth/v1/token', body);
+  },
+  validateToken() {
+    return axios.post('http://localhost/ranek/wp-json/jwt-auth/v1/token/validate');
   }
 };
 

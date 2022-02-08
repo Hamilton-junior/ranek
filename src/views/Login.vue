@@ -5,7 +5,7 @@
       <label for="email">Email</label>
       <input type="email" name="email" id="email" v-model="login.email">
       <label for="password">Senha</label>
-      <input type="password" name="password" id="password" v-model="login.password">
+      <input type="password" name="password" id="password" v-model="login.senha">
       <button class="btn" @click.prevent="logar">Logar</button>
     </form>
     <p class="lose-password">
@@ -26,14 +26,18 @@ export default {
     return {
       login: {
         email: '',
-        password: '',
+        senha: '',
       }
     }
   },
   methods: {
     logar() {
-      this.$store.dispatch("getUser", this.login.email);
+      this.$store.dispatch('loginUser', this.login).then(response => {
+        console.log(response);
+      this.$store.dispatch("getUser");
       this.$router.push({name: 'user'})
+      })
+      
     }
   }
 }
