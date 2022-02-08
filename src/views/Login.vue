@@ -7,9 +7,10 @@
       <label for="password">Senha</label>
       <input type="password" name="password" id="password" v-model="login.senha">
       <button class="btn" @click.prevent="logar">Logar</button>
+      <ErroNotification :erros="erros" />
     </form>
     <p class="lose-password">
-      <a href="/" target="_blank">Perdeu a senha? Clique aqui.</a>
+      <a href="http://localhost/ranek/wp-login.php?action=lostpassword" target="_blank">Perdeu a senha? Clique aqui.</a>
     </p>
     <LoginCreate />
   </section>
@@ -27,16 +28,19 @@ export default {
       login: {
         email: '',
         senha: '',
-      }
+      },
+      erros: [],
     }
   },
   methods: {
     logar() {
+      this.erros = [];
       this.$store.dispatch('loginUser', this.login).then(() => {
       this.$store.dispatch("getUser");
       this.$router.push({name: 'user'})
-      })
-      
+      }).catch(erro => {
+        this.erros.push(erro.response.data.message);
+      });
     }
   }
 }

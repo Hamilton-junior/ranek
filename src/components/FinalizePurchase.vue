@@ -1,6 +1,7 @@
 <template>
   <section>
     <h2>Endereço de Envio</h2>
+    <ErroNotification :erros="erros" />
     <UserForm>
       <button class="btn" @click.prevent="finalizePurchase">Finalizar Compra</button>
     </UserForm>
@@ -14,6 +15,11 @@ import { mapState } from 'vuex';
 export default {
   name: 'FinalizePurchase',
   props: ['product'],
+  data() {
+    return {
+      erros: [],
+    }
+  },
   components: {
     UserForm,
   },
@@ -51,10 +57,11 @@ export default {
       // levar para a página de usuário
       await this.createTransaction();
       } catch(error) {
-        console.log(error);
+        this.erros.push(error.response.data.message);
       }
     },
     finalizePurchase() {
+      this.erros = [];
       if(this.$store.state.login) {
         this.createTransaction();
       } else {

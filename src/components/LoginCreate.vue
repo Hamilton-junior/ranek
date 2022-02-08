@@ -1,6 +1,7 @@
 <template>
   <section>
     <h2>Crie a sua conta</h2>
+    <ErroNotification :erros="erros" />
     <transition mode="out-in">
       <button v-if="!create" class="btn" @click="create = true">
         Criar Conta
@@ -22,10 +23,12 @@ export default {
   data() {
     return {
       create: false,
+      erros: [],
     };
   },
   methods: {
     async createUser() {
+      this.erros = [];
       try {
         // cria o usuário
       await this.$store.dispatch("createUser", this.$store.state.user);
@@ -35,7 +38,7 @@ export default {
       // levar para a página de usuário
       this.$router.push({ name: "user"})
       } catch(error) {
-        console.log(error);
+        this.erros.push(error.response.data.message);
       }
     },
   }
