@@ -89,6 +89,14 @@ export default {
   border-radius: 4px;
   transition: all 0.2s;
 }
+
+@media (max-width: 500px) {
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 10px;
+  }
+}
 .product:hover {
   box-shadow: 0 6px 12px rgba(30, 60, 90, 0.2);
   transform: scale(1.1);

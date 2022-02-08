@@ -19,11 +19,18 @@ export default {
 
 <style scoped>
 .product {
-  display: grid;
+display: grid;
 grid-template-columns: minmax(100px, 200px) 1fr;
 gap: 20px;
 margin-bottom: 40px;
 position: relative;
+}
+
+@media (max-width: 500px) {
+  .product {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 }
 
 .info {
