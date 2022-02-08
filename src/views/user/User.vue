@@ -23,6 +23,9 @@ export default {
       this.$store.dispatch("logOutUser");
       this.$router.push("/login");
     }
+  },
+  created() {
+    document.title = "Usuário";
   }
 }
 </script>
