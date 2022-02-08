@@ -78,4 +78,13 @@ export default {
     margin: 0px;
     justify-self: end;
   }
+  @media (max-width: 500px) {
+  .delivery {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  h3 {
+    justify-self: start;
+  }
+}
 </style>
